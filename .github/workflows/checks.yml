@@ -46,8 +46,9 @@ jobs:
       with:
         languages: cpp
 
-    - name: ${{matrix.check}}
-      run: make ${{matrix.check}}
+    - name: Perform build
+      run: |
+        make ${matrix.check}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
