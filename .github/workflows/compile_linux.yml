@@ -52,7 +52,13 @@ jobs:
           ccache -s
           ccache -z
 
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: cpp
+
     - name: make ${{matrix.config}}
       run: make ${{matrix.config}}
-    - name: ccache post-run
-      run: ccache -s
+    
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1

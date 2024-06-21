@@ -40,8 +40,18 @@ jobs:
       run: |
           export
           ulimit -a
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: cpp
+
     - name: ${{matrix.check}}
       run: make ${{matrix.check}}
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+
     - name: upload coverage
       if: contains(matrix.check, 'coverage')
       uses: codecov/codecov-action@v1
